@@ -1,7 +1,16 @@
 import { Elysia } from "elysia";
+import { config } from "dotenv";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+config();
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+const app = new Elysia()
+
+app.post("/validate", async ({ body }: { body: any }) => {
+  const cid = body.cid;
+  console.log(cid);
+  return { status: "ok" };
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 3000}`);
+})
