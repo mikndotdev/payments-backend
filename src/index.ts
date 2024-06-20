@@ -1,5 +1,6 @@
 import { Elysia } from "elysia";
 import { config } from "dotenv";
+import { validate } from "./validate";
 
 config();
 
@@ -7,7 +8,7 @@ const app = new Elysia()
 
 app.post("/validate", async ({ body }: { body: any }) => {
   const cid = body.cid;
-  console.log(cid);
+  await validate({ cid });
   return { status: "ok" };
 });
 
